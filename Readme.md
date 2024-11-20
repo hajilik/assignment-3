@@ -39,4 +39,4 @@ To run the program,
 - python script_name.py <image_path> <square_size> <mode> 
 - Here, <image_path>: Path to the image file you want to process, <square_size>: The size of each square block for pixelation (e.g., 10, 20, 30), <mode>: Choose either 'S' for single-threaded or 'M' for multi-threaded processing.
 - Example: python processor.py azerbaijan-flag.jpg 20 S 
-This means the image at azerbaijan-flag.jpg will be processed with a block size of 20 in single-threaded mode. The result.jpg image will be saved in ./test_images folder.
+- This means the image at azerbaijan-flag.jpg will be processed with a block size of 20 in single-threaded mode. The result.jpg image will be saved in ./test_images folder.
