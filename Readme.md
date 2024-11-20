@@ -9,8 +9,7 @@ This program pixelates images by averaging the colors (RGB) of square blocks. Yo
 - **Progress Visualization**: Shows you how the image is being processed in real-time.
 
 
-##Logic Behind Single and Multi-threaded Processing
-
+## Logic Behind Single and Multi-threaded Processing
 1. Single-threaded Processing:
 - The image is processed from left-to-right and top-to-bottom.
 - Each block is processed one at a time by calculating its average color and applying it to the respective block.
