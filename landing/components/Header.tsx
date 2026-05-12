@@ -70,10 +70,16 @@ export default function Header() {
             label="Sandbox"
             className={scrolled ? "" : "border-white/20 text-white/50"}
           />
-          <ComingSoonButton
-            label="Daxil ol"
-            className={scrolled ? "" : "border-white/20 text-white/50"}
-          />
+          <a
+            href="/login"
+            className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all hover:shadow-sm active:scale-[0.98] ${
+              scrolled
+                ? "border-gray-200 text-gray-700 hover:bg-gray-50"
+                : "border-white/20 text-white hover:bg-white/10"
+            }`}
+          >
+            Login
+          </a>
           <a
             href="#contact"
             className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-[0.98]"
@@ -119,7 +125,13 @@ export default function Header() {
             </a>
             <div className="flex gap-2">
               <ComingSoonButton label="Sandbox" className="flex-1 text-center justify-center" />
-              <ComingSoonButton label="Daxil ol" className="flex-1 text-center justify-center" />
+              <a
+                href="/login"
+                onClick={() => setMenuOpen(false)}
+                className="flex-1 rounded-lg border border-gray-200 px-4 py-2.5 text-center text-sm font-medium text-gray-700 transition-all hover:bg-gray-50"
+              >
+                Login
+              </a>
             </div>
           </div>
         </div>
