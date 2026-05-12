@@ -35,10 +35,10 @@ export default function Header() {
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 shrink-0">
           <Image
-            src="/upi-logo.svg"
+            src="/upi-logo.png"
             alt="UPI"
-            width={56}
-            height={22}
+            width={72}
+            height={34}
             priority
             className={scrolled ? "" : "brightness-0 invert"}
           />

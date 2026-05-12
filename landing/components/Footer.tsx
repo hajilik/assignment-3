@@ -39,10 +39,10 @@ export default function Footer() {
           <div>
             <a href="#" className="flex items-center gap-3 mb-4">
               <Image
-                src="/upi-logo.svg"
+                src="/upi-logo.png"
                 alt="UPI"
-                width={56}
-                height={22}
+                width={72}
+                height={34}
                 className="brightness-0 invert"
               />
               <span className="text-xs font-medium text-gray-500 border-l border-gray-700 pl-3">
