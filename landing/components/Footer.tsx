@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const navGroups = [
   {
     title: "Platform",
@@ -35,16 +37,16 @@ export default function Footer() {
         <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <a href="#" className="flex items-center gap-2.5 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <rect x="2" y="5" width="14" height="9" rx="1.5" stroke="white" strokeWidth="1.5" />
-                  <path d="M2 8h14" stroke="white" strokeWidth="1.5" />
-                  <rect x="4" y="11" width="3" height="1.5" rx="0.5" fill="white" />
-                </svg>
-              </div>
-              <span className="text-sm font-semibold text-white">
-                Unibank <span className="font-light opacity-60">BaaS</span>
+            <a href="#" className="flex items-center gap-3 mb-4">
+              <Image
+                src="/upi-logo.svg"
+                alt="UPI"
+                width={56}
+                height={22}
+                className="brightness-0 invert"
+              />
+              <span className="text-xs font-medium text-gray-500 border-l border-gray-700 pl-3">
+                BaaS
               </span>
             </a>
             <p className="max-w-xs text-sm leading-relaxed">

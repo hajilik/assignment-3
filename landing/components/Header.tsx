@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import ComingSoonButton from "./ui/ComingSoonButton";
 
 const navLinks = [
@@ -32,16 +33,17 @@ export default function Header() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 shrink-0">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <rect x="2" y="5" width="14" height="9" rx="1.5" stroke="white" strokeWidth="1.5" />
-              <path d="M2 8h14" stroke="white" strokeWidth="1.5" />
-              <rect x="4" y="11" width="3" height="1.5" rx="0.5" fill="white" />
-            </svg>
-          </div>
-          <span className={`text-sm font-semibold tracking-tight ${scrolled ? "text-gray-900" : "text-white"}`}>
-            Unibank <span className="font-light opacity-70">BaaS</span>
+        <a href="#" className="flex items-center gap-3 shrink-0">
+          <Image
+            src="/upi-logo.svg"
+            alt="UPI"
+            width={56}
+            height={22}
+            priority
+            className={scrolled ? "" : "brightness-0 invert"}
+          />
+          <span className={`text-xs font-medium tracking-wide border-l pl-3 ${scrolled ? "border-gray-200 text-gray-400" : "border-white/20 text-white/60"}`}>
+            BaaS
           </span>
         </a>
 
