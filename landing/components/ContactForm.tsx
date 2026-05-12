@@ -47,9 +47,31 @@ export default function ContactForm() {
     defaultValues: { products: [] },
   });
 
-  const onSubmit = async (_data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
+    try {
+      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL;
+      if (webhookUrl) {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            company: data.company,
+            fullName: data.fullName,
+            role: data.role,
+            email: data.email,
+            products: data.products,
+            message: data.message,
+            submittedAt: new Date().toISOString(),
+            source: "baas-landing",
+          }),
+        });
+      } else {
+        await new Promise((r) => setTimeout(r, 1200));
+      }
+    } catch {
+      // Don't block submission on webhook errors
+    }
     setLoading(false);
     setSubmitted(true);
   };

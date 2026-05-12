@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Play, Copy, CheckCircle2, ChevronDown, ChevronRight, ArrowLeft } from "lucide-react";
+import { Play, Copy, CheckCircle2, ChevronDown, ChevronRight, ArrowLeft, Lock, Mail } from "lucide-react";
 
 const ENDPOINTS = [
   {
@@ -238,6 +238,14 @@ function syntaxHighlight(json: string) {
 }
 
 export default function SandboxPage() {
+  const [authChecked, setAuthChecked] = useState(false);
+  const [isAuthed, setIsAuthed] = useState(false);
+
+  useEffect(() => {
+    setIsAuthed(!!localStorage.getItem("baas_auth"));
+    setAuthChecked(true);
+  }, []);
+
   const [selected, setSelected] = useState(ENDPOINTS[0].items[0]);
   const [body, setBody] = useState(ENDPOINTS[0].items[0].body);
   const [running, setRunning] = useState(false);
@@ -272,6 +280,66 @@ export default function SandboxPage() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  if (!authChecked) {
+    return <div className="h-screen bg-[#0d1117]" />;
+  }
+
+  if (!isAuthed) {
+    return (
+      <div className="flex h-screen flex-col bg-[#0d1117]">
+        <header className="flex h-14 items-center border-b border-white/5 px-5 shrink-0 gap-4">
+          <a href="/" className="flex items-center gap-2 text-gray-500 hover:text-gray-300 transition-colors">
+            <ArrowLeft size={15} />
+            <span className="text-xs">Back to site</span>
+          </a>
+          <div className="h-4 w-px bg-white/10" />
+          <Image src="/upi-logo.png" alt="UPI" width={48} height={22} className="brightness-0 invert" />
+          <span className="text-xs font-medium text-white/40 border-l border-white/10 pl-2.5">API Sandbox</span>
+        </header>
+
+        <div className="flex flex-1 items-center justify-center px-6">
+          <div className="text-center max-w-md">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 mb-6">
+              <Lock size={28} className="text-blue-400" />
+            </div>
+            <h1 className="text-2xl font-bold text-white mb-3">Sandbox access required</h1>
+            <p className="text-gray-400 leading-relaxed mb-8 text-sm">
+              The Unibank BaaS API sandbox is available to approved partners only. Sign in with your partner credentials to explore all endpoints.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="/login" className="rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500 transition-colors">
+                Sign in to continue
+              </a>
+              <a href="/#contact" className="rounded-xl border border-white/10 px-6 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+                <Mail size={14} /> Request access
+              </a>
+            </div>
+            <p className="mt-8 text-xs text-gray-600">
+              Submitted the form? Check your email for an access link.
+            </p>
+            <div className="mt-8 rounded-2xl border border-white/5 bg-white/[0.02] p-4 text-left">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-600 mb-3">Available once signed in</p>
+              <div className="space-y-2">
+                {[
+                  { method: "POST", path: "/v1/cards/issue" },
+                  { method: "GET",  path: "/v1/transactions" },
+                  { method: "POST", path: "/v1/payments/initiate" },
+                  { method: "POST", path: "/v1/lending/applications" },
+                ].map((ep) => (
+                  <div key={ep.path} className="flex items-center gap-2 opacity-50">
+                    <span className={`shrink-0 rounded px-1.5 py-0.5 font-mono text-[9px] font-bold ${ep.method === "GET" ? "bg-emerald-100 text-emerald-700" : "bg-blue-100 text-blue-700"}`}>{ep.method}</span>
+                    <span className="font-mono text-xs text-gray-400">{ep.path}</span>
+                  </div>
+                ))}
+                <p className="text-[10px] text-gray-700 pt-1">+ 7 more endpoints</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen flex-col bg-[#0d1117] overflow-hidden">
