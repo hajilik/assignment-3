@@ -50,7 +50,7 @@ export default function ContactForm() {
   const onSubmit = async (data: FormData) => {
     setLoading(true);
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL;
+      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || "http://localhost:5678/webhook-test/baas-lead-intake";
       if (webhookUrl) {
         await fetch(webhookUrl, {
           method: "POST",
